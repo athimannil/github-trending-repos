@@ -24,9 +24,12 @@ const RepositoryList = () => {
   console.log("--------------------------------");
   console.log("Languages:", selectedLanguage);
 
-  const filteredRepos = repos.filter(
-    (repo) => selectedLanguage === "all" || repo.language === selectedLanguage
-  );
+  const filteredRepos = repos.filter((repo) => {
+    const matchesTab = selectedTab === "all" || isStarred(repo.id);
+    const matchesLanguage =
+      selectedLanguage === "All" || repo.language === selectedLanguage;
+    return matchesTab && matchesLanguage;
+  });
 
   return (
     <Container className="main" size="xl">
