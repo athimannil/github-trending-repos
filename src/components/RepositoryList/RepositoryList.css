@@ -1,3 +1,7 @@
+.main {
+  padding-top: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+}
 .repofilter {
   display: flex;
   flex-wrap: wrap;

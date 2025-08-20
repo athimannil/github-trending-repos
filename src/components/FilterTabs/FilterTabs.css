@@ -1,0 +1,32 @@
+.filtertabs {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 2px solid #f3eaff;
+}
+
+.filtertabs__tab {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: none;
+  border-radius: 0;
+  padding: 0.7rem 1.5rem 0.6rem 1.5rem;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  position: relative;
+  border-bottom: 2.5px solid transparent;
+  margin-bottom: -2px;
+}
+
+.filtertabs__tab:hover {
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-surface);
+}
+
+.filtertabs__tab-active {
+  color: var(--color-primary-dark);
+  border-bottom: 2.5px solid var(--color-primary-light);
+  background-color: var(--color-white);
+  z-index: 2;
+}

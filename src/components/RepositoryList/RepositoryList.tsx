@@ -5,6 +5,7 @@ import LanguageFilter from "../LanguageFilter/LanguageFilter";
 import { useRepositories } from "../../hooks/useRepositories";
 
 import "./RepositoryList.css";
+import FilterTabs from "../FilterTabs/FilterTabs";
 
 const RepositoryList = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("all");
@@ -27,11 +28,8 @@ const RepositoryList = () => {
 
   return (
     <Container className="main" size="xl">
-      <h1>Repository List</h1>
-      {/* Add your repository list rendering logic here */}
       <div className="repofilter">
-        {/* <FilterTabs /> */}
-        <div>TAB</div>
+        <FilterTabs />
         <LanguageFilter
           languages={languages}
           selectedLanguage={selectedLanguage}
@@ -40,7 +38,6 @@ const RepositoryList = () => {
       </div>
 
       <main>
-        <p>This is where the list of repositories will be displayed.</p>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {filteredRepos && filteredRepos.length > 0 ? (
