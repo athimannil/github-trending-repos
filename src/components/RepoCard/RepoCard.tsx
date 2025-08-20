@@ -1,12 +1,12 @@
 import { BsBoxArrowUpRight, BsStar, BsStarFill } from "react-icons/bs";
 import { PiGitForkLight } from "react-icons/pi";
 
-import { RepositoryCardData } from "../../types/index";
+import { Repository } from "../../types/index";
 
 import "./RepoCard.css";
 
 interface RepoCardProps {
-  repo: RepositoryCardData;
+  repo: Repository;
   isStarred: boolean;
   onToggleStar: () => void;
 }
@@ -14,6 +14,7 @@ interface RepoCardProps {
 const RepoCard = ({ repo, onToggleStar, isStarred }: RepoCardProps) => {
   const {
     name,
+    full_name,
     html_url,
     description,
     stargazers_count,
@@ -37,12 +38,20 @@ const RepoCard = ({ repo, onToggleStar, isStarred }: RepoCardProps) => {
             target="_blank"
             rel="noopener noreferrer"
             className="repocard__link"
+            aria-label={`Open ${full_name} on GitHub`}
           >
             <BsBoxArrowUpRight size={14} />
           </a>
         </div>
-        <button className="repocard__star-button" onClick={onToggleStar}>
+        <button
+          className={`repocard__star-button ${
+            isStarred ? "repocard__star-button--starred" : ""
+          }`}
+          onClick={onToggleStar}
+          aria-label={`${isStarred ? "Unstar" : "Star"} ${name}`}
+        >
           {isStarred ? <BsStarFill size={12} /> : <BsStar size={12} />}
+          <span className="sr-only">{isStarred ? "Starred" : "Star"}</span>
         </button>
       </div>
       <p className="repocard__description">
@@ -71,7 +80,7 @@ const RepoCard = ({ repo, onToggleStar, isStarred }: RepoCardProps) => {
           <span className="repocard__owner-name">{owner.login}</span>
         </div>
         <span className="repocard__updated-at">
-          Updated at: {new Date(updated_at).toLocaleDateString()}
+          Updated: {new Date(updated_at).toLocaleDateString()}
         </span>
       </div>
     </div>
