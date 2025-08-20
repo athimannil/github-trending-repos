@@ -7,7 +7,7 @@ import { useRepositories } from "../../hooks/useRepositories";
 import "./RepositoryList.css";
 
 const RepositoryList = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState("All");
+  const [selectedLanguage, setSelectedLanguage] = useState("all");
 
   const { repos, loading, error, refetch } = useRepositories();
 
