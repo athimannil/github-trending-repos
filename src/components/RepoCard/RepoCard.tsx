@@ -1,8 +1,17 @@
-import { BsBoxArrowUpRight } from "react-icons/bs";
+import { BsBoxArrowUpRight, BsStar, BsStarFill } from "react-icons/bs";
 import { PiGitForkLight } from "react-icons/pi";
+
+import { RepositoryCardData } from "../../types/index";
+
 import "./RepoCard.css";
 
-const RepoCard = ({ repo }) => {
+interface RepoCardProps {
+  repo: RepositoryCardData;
+  isStarred: boolean;
+  onToggleStar: () => void;
+}
+
+const RepoCard = ({ repo, onToggleStar, isStarred }: RepoCardProps) => {
   const {
     name,
     html_url,
@@ -13,6 +22,11 @@ const RepoCard = ({ repo }) => {
     owner,
     updated_at,
   } = repo;
+
+  const formatNumber = (num: number): string => {
+    return num >= 1000 ? `${(num / 1000).toFixed(1)}k` : num.toString();
+  };
+
   return (
     <div className="repocard">
       <div className="repocard__header">
@@ -27,18 +41,23 @@ const RepoCard = ({ repo }) => {
             <BsBoxArrowUpRight size={14} />
           </a>
         </div>
-        <div className="repocard__star">
-          <span className="repocard__star-count">{stargazers_count}</span>
-          <span className="repocard__star-icon">★</span>
-        </div>
+        <button className="repocard__star-button" onClick={onToggleStar}>
+          {isStarred ? <BsStarFill size={12} /> : <BsStar size={12} />}
+        </button>
       </div>
       <p className="repocard__description">
         {description || "No description available"}
       </p>
       <div className="repocard__stats">
         <span className="repocard__stat">
+          <BsStar size={14} />
+          {formatNumber(stargazers_count)}
+        </span>
+        <span className="repocard__stat">
           <PiGitForkLight size={14} />
-          <span className="repocard__stat-count">{forks_count}</span>
+          <span className="repocard__stat-count">
+            {formatNumber(forks_count)}
+          </span>
         </span>
         {language && <span className="repocard__language">{language}</span>}
       </div>
