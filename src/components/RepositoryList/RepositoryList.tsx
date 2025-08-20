@@ -4,6 +4,9 @@ import Container from "../Container/Container";
 // import { Repository } from "../../types/index";
 
 import { useRepositories } from "../../hooks/useRepositories";
+import RepoCard from "../RepoCard/RepoCard";
+
+import "./RepositoryList.css";
 
 const RepositoryList = () => {
   const { repos, loading, error, refetch } = useRepositories();
@@ -21,21 +24,11 @@ const RepositoryList = () => {
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {repos && repos.length > 0 ? (
-          <ul>
+          <section className="repository-list">
             {repos.map((repo) => (
-              <li key={repo.id}>
-                <h2>{repo.name}</h2>
-                <p>{repo.description}</p>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  View Repository
-                </a>
-              </li>
+              <RepoCard repo={repo} key={repo.id} />
             ))}
-          </ul>
+          </section>
         ) : (
           !loading && <p>No repositories found.</p>
         )}

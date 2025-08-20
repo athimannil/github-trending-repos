@@ -1,0 +1,7 @@
+.repository-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-lg);
+  margin: 0;
+  padding: 0;
+}
