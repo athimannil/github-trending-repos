@@ -1,9 +1,18 @@
 import { BsBoxArrowUpRight } from "react-icons/bs";
-import "./RepoCard.css";
 import { PiGitForkLight } from "react-icons/pi";
+import "./RepoCard.css";
 
 const RepoCard = ({ repo }) => {
-  const { name, html_url, description, stargazers_count, language } = repo;
+  const {
+    name,
+    html_url,
+    description,
+    stargazers_count,
+    language,
+    forks_count,
+    owner,
+    updated_at,
+  } = repo;
   return (
     <div className="repocard">
       <div className="repocard__header">
@@ -29,7 +38,7 @@ const RepoCard = ({ repo }) => {
       <div className="repocard__stats">
         <span className="repocard__stat">
           <PiGitForkLight size={14} />
-          <span className="repocard__stat-count">{repo.forks_count}</span>
+          <span className="repocard__stat-count">{forks_count}</span>
         </span>
         {language && <span className="repocard__language">{language}</span>}
       </div>
@@ -37,13 +46,13 @@ const RepoCard = ({ repo }) => {
         <div className="repocard__owner-info">
           <img
             className="repocard__owner-avatar"
-            src={repo.owner.avatar_url}
-            alt={`${repo.owner.login}'s avatar`}
+            src={owner.avatar_url}
+            alt={`${owner.login}'s avatar`}
           />
-          <span className="repocard__owner-name">{repo.owner.login}</span>
+          <span className="repocard__owner-name">{owner.login}</span>
         </div>
         <span className="repocard__updated-at">
-          Updated at: {new Date(repo.updated_at).toLocaleDateString()}
+          Updated at: {new Date(updated_at).toLocaleDateString()}
         </span>
       </div>
     </div>
