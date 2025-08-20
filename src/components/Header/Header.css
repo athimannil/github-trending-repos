@@ -1,0 +1,34 @@
+.header {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  padding-bottom: var(--spacing-md);
+}
+
+.header__titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header__title {
+  margin: 0;
+  color: var(--color-white);
+  font-size: 2rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.header__subtitle {
+  margin: 0.2rem 0 0 0;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #f3eaff;
+  letter-spacing: 0.2px;
+}
