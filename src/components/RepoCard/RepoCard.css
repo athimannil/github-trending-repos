@@ -63,7 +63,7 @@
 
 .repocard__description {
   flex: 1;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin-bottom: var(--spacing-lg);
   line-height: 1.5;
   display: -webkit-box;
@@ -84,7 +84,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary); /* Fixed: was --text-secondary */
   font-size: var(--font-size-sm);
 }
 
@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
-  color: var(--text-secondary);
+  color: var(--color-text-secondary); /* Fixed: was --text-secondary */
   font-size: var(--font-size-sm);
 }
 .repocard__footer {
@@ -100,9 +100,9 @@
   justify-content: space-between;
   align-items: center;
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--color-border); /* Fixed: was --border-color */
   font-size: var(--font-size-xs);
-  color: var(--text-muted);
+  color: var(--color-text-muted); /* Fixed: was --text-muted */
   gap: var(--spacing-sm);
 }
 

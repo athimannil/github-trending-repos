@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Repository } from "../types/index";
 
 const useStarredRepos = () => {
-  const [starredRepos, setStarredRepos] = useState<number[]>([]);
+  const [starredRepos, setStarredRepos] = useState<Repository[]>([]);
 
   useEffect(() => {
     const stored = localStorage.getItem("starred-repos");
@@ -18,11 +19,12 @@ const useStarredRepos = () => {
     }
   }, []);
 
-  const toggleStar = (repoId: number) => {
+  const toggleStar = (repo: Repository) => {
     setStarredRepos((prev) => {
-      const newStarredRepos = prev.includes(repoId)
-        ? prev.filter((id) => id !== repoId)
-        : [...prev, repoId];
+      const isCurrentlyStarred = prev.some((starred) => starred.id === repo.id);
+      const newStarredRepos = isCurrentlyStarred
+        ? prev.filter((starred) => starred.id !== repo.id)
+        : [...prev, repo];
 
       localStorage.setItem("starred-repos", JSON.stringify(newStarredRepos));
       return newStarredRepos;
@@ -30,7 +32,7 @@ const useStarredRepos = () => {
   };
 
   const isStarred = (repoId: number) => {
-    return starredRepos.includes(repoId);
+    return starredRepos.some((repo) => repo.id === repoId);
   };
 
   return {

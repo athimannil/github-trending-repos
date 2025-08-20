@@ -11,18 +11,20 @@ import FilterTabs from "../FilterTabs/FilterTabs";
 const RepositoryList = () => {
   const [selectedTab, setSelectedTab] = useState<"all" | "starred">("all");
   const [selectedLanguage, setSelectedLanguage] = useState("all");
-  const { toggleStar, isStarred } = useStarredRepos();
+  const { toggleStar, isStarred, starredRepos } = useStarredRepos();
   const { repos, loading, error, refetch } = useRepositories();
 
+  const allRepos = selectedTab === "all" ? repos : starredRepos;
   const languages = Array.from(
-    new Set(repos.map(({ language }) => language).filter(Boolean) as string[])
+    new Set(
+      allRepos.map(({ language }) => language).filter(Boolean) as string[]
+    )
   ).sort();
 
-  const filteredRepos = repos.filter((repo) => {
-    const matchesTab = selectedTab === "all" || isStarred(repo.id);
+  const filteredRepos = allRepos.filter((repo) => {
     const matchesLanguage =
-      selectedLanguage === "All" || repo.language === selectedLanguage;
-    return matchesTab && matchesLanguage;
+      selectedLanguage === "all" || repo.language === selectedLanguage;
+    return matchesLanguage;
   });
 
   return (
@@ -46,7 +48,7 @@ const RepositoryList = () => {
                 repo={repo}
                 key={repo.id}
                 isStarred={isStarred(repo.id)}
-                onToggleStar={() => toggleStar(repo.id)}
+                onToggleStar={() => toggleStar(repo)}
               />
             ))}
           </section>
