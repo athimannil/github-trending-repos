@@ -8,9 +8,7 @@ function App() {
   return (
     <>
       <Header />
-      {/* <main> */}
       <RepositoryList />
-      {/* </main> */}
       <Footer />
     </>
   );

@@ -11,18 +11,12 @@ import FilterTabs from "../FilterTabs/FilterTabs";
 const RepositoryList = () => {
   const [selectedTab, setSelectedTab] = useState<"all" | "starred">("all");
   const [selectedLanguage, setSelectedLanguage] = useState("all");
-  const { starredRepos, toggleStar, isStarred } = useStarredRepos();
+  const { toggleStar, isStarred } = useStarredRepos();
   const { repos, loading, error, refetch } = useRepositories();
-
-  console.log("--------------------------------");
-  console.log(repos, loading, error);
 
   const languages = Array.from(
     new Set(repos.map(({ language }) => language).filter(Boolean) as string[])
   ).sort();
-
-  console.log("--------------------------------");
-  console.log("Languages:", selectedLanguage);
 
   const filteredRepos = repos.filter((repo) => {
     const matchesTab = selectedTab === "all" || isStarred(repo.id);
@@ -59,7 +53,6 @@ const RepositoryList = () => {
         ) : (
           !loading && <p>No repositories found.</p>
         )}
-        <button onClick={refetch}>Refetch Repositories</button>
       </main>
     </Container>
   );
